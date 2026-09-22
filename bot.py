@@ -19,11 +19,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=InlineKeyboardMarkup(kb)
     )
 
-server = Flask(__name__)
+server = Flask(__name__, static_folder=".", static_url_path="")
 
 @server.route("/")
 def home():
-    return "HuquqON bot ishlayapti"
+    return server.send_static_file("index.html")
 
 def run_server():
     port = int(os.environ.get("PORT", 10000))
